@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { View, TextInput, StyleSheet, AsyncStorage } from "react-native";
 import { Icon }  from 'native-base';
 import PersonService from '../realm/RealmService';
+import ProfileHeader from "./ProfileHeader";
 
 class ProfileTab extends Component{
     constructor(props) {
@@ -24,13 +25,16 @@ class ProfileTab extends Component{
         )
     }
 
-    retrieveUserName = async () => {
+    retrieveUser= async () => {
         try {
           const value = await AsyncStorage.getItem('UserName');
           if (value !== null) {
-            // We have data!!
             this.setState({ UserName:value });
-            alert(value);
+
+            const user = PersonService.findUser(this.state.UserName);
+            this.setState({ FirstName: user.FirstName });
+            this.setState({ LastName: user.LastName });
+            this.setState({ Email: user.Email });
           }
          } catch (error) {
            // Error retrieving data
@@ -38,24 +42,17 @@ class ProfileTab extends Component{
     }
 
     componentWillMount() {
-        this.retrieveUserName();
-        
-        let user = PersonService.findUser(this.state.UserName);
-        
-        //this.state.FirstName = user.FirstName;
-        //LastName: '',
-        //Email: '',
-        //Password: '',
-    }
-
-    componentDidMount() {
-
+        this.retrieveUser();
     }
 
     render(){
+
         return (
+             
             <View style={styles.container}>
-            <TextInput style={styles.inputBox}
+                <ProfileHeader FirstName={ this.state.FirstName }/>
+
+             <TextInput style={styles.inputBox}
               placeholder="Username"
               selectionColor="#fff"
               value={this.state.UserName}
@@ -73,13 +70,17 @@ class ProfileTab extends Component{
             <TextInput style={styles.inputBox}
               placeholder="LastName"
               selectionColor="#fff"
+              value={this.state.LastName}
+              editable = {this.state.editable}
               ref={(input) => this.lastname = input}
               onSubmitEditing={()=> this.email.focus()}
               onChangeText={(LastName) => this.setState({LastName})}/>
             <TextInput style={styles.inputBox}
               placeholder="Email"
               selectionColor="#fff"
-              keyboardType="email-address" 
+              keyboardType="email-address"
+              value={this.state.Email}
+              editable = {this.state.editable}
               ref={(input) => this.email = input}
               onSubmitEditing={()=> this.password.focus()}
               onChangeText={(Email) => this.setState({Email})}/>
@@ -88,7 +89,7 @@ class ProfileTab extends Component{
               secureTextEntry={true}
               ref={(input) => this.password = input}
               onChangeText={(Password) => this.setState({Password})}/>
-          </View> 
+            </View> 
         )
     }
 }
