@@ -28,12 +28,12 @@ const styles = StyleSheet.create({
         justifyContent :'center',
     },
     headerBackground: {
-        flex: 1,
+        //flex: 1,
         width: null,
         alignSelf: 'stretch',
     },
     header: {
-        flex: 1,
+        //flex: 1,
         alignItems: 'center',
         justifyContent :'center',
         backgroundColor: 'rgba(0,0,0,0.5)',

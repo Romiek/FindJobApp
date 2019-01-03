@@ -21,7 +21,11 @@ export default class Signup extends Component {
     }
   }
 
-  signUp() {
+  static navigationOptions = {
+    header: null,
+  }
+  
+  signUp(navigate) {
     let formstate = this.refs.SignupForm.getState()
 
     if (formstate.UserName !== '') {
@@ -32,6 +36,7 @@ export default class Signup extends Component {
         //this.hashPassword(formstate.Password);
         //formstate.Password = this.state.hash;
         PersonService.signUp(formstate);
+        navigate("Login");
       }
     } else {
       alert('UserName is Empty');
@@ -65,7 +70,7 @@ export default class Signup extends Component {
 			<View style={styles.container}>
 				<SignupForm ref='SignupForm'/>
         <Text> {info} </Text>
-        <TouchableOpacity style={styles.button} onPress={() => this.signUp() }>
+        <TouchableOpacity style={styles.button} onPress={() => this.signUp(navigate) }>
           <Text style={styles.buttonText}>Signup</Text>
         </TouchableOpacity>
 				<View style={styles.signupTextCont}>

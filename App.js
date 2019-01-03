@@ -1,11 +1,12 @@
 import React from "react";
-import { createStackNavigator, createAppContainer, createBottomTabNavigator } from 'react-navigation';
+import { createStackNavigator, createAppContainer, 
+         createBottomTabNavigator, createSwitchNavigator } from 'react-navigation';
 import { View, Text, StyleSheet, Platform  } from "react-native";
 import Login from './components/authentication/Login';
 import Signup from './components/authentication/Signup';
 import HomeTab from './components/tabNavigator/HomeTab';
 import JobsTab from './components/tabNavigator/JobsTab';
-import ProfileTab from './components/tabNavigator/ProfileTab';
+import ProfileTab from './components/tabNavigator/ProfileTab2';
 import OptionsTab from './components/tabNavigator/OptionsTab';
 
 import { Icon }  from 'native-base';
@@ -22,7 +23,8 @@ const AppAuthenStackNavigator = createStackNavigator({
   Login: { screen: Login },
   Signup: { screen: Signup },
 },{ 
-  headerMode: 'none'
+  headerMode: 'none',
+  headerVisible: false,
 });
 
 const AppHomeStackNavigator = createStackNavigator({
@@ -42,12 +44,10 @@ const AppOptionsStackNavigator = createStackNavigator({
 });
 
 const AppTabNavigator = createBottomTabNavigator({
-  Login: { screen:  AppAuthenStackNavigator, navigationOptions : { tabBarVisible: false } },
   HomeTab: { screen: AppHomeStackNavigator },
   JobsTab: { screen : AppJobsStackNavigator },
   ProfileTab: { screen : AppProfileStackNavigator }, 
   OptionsTab: { screen : AppOptionsStackNavigator },
-  initialRouteName: 'Login',
 },{
   defaultNavigationOptions: ({ navigation }) => ({
     tabBarIcon: ({ focused, tintColor }) => {
@@ -77,6 +77,7 @@ const AppTabNavigator = createBottomTabNavigator({
         }
       })
     },
+    initialRouteName: 'Login',
     activeTintColor: '#000',
     inactiveTintColor: '#d1cece',
     showLabel: false,
@@ -84,7 +85,12 @@ const AppTabNavigator = createBottomTabNavigator({
   }
 });
 
-const AppContainer = createAppContainer(AppTabNavigator);
+const AppSwitcheStackNavigator = createSwitchNavigator({
+  Login: { screen:  AppAuthenStackNavigator },
+  Home: { screen : AppTabNavigator}
+});
+
+const AppContainer = createAppContainer(AppSwitcheStackNavigator);
 
 export default AppContainer;
 

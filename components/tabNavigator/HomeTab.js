@@ -7,7 +7,7 @@ class HomeTab extends Component{
     static navigationOptions = {
         title: "Find Jobs",
         headerRight: <Icon style={{paddingRight:10}} 
-        name="ios-chatbubbles"/>,        
+        name="ios-chatbubbles"/>,   
     }
     render(){
         return (

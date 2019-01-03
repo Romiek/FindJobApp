@@ -11,6 +11,10 @@ class PersonService  {
         return repository.objects(PersonSchema.name);
     }
 
+    static deleteAll(){
+        return repository.deleteAll();
+    }
+
     static findUser(UserName) {
         let persons = repository.objects(PersonSchema.name);
         

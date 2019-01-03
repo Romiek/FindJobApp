@@ -17,12 +17,9 @@ class ProfileTab extends Component{
           editable: false
         };
       }
-    
+
     static navigationOptions = {
         title: "Profile",
-        tabBarIcon: ({ tintColor } ) => (
-            <Icon name="ios-person" style= {{color:tintColor}} />
-        )
     }
 
     retrieveUser= async () => {
@@ -40,8 +37,17 @@ class ProfileTab extends Component{
            // Error retrieving data
          }
     }
+    _renderPassword () {
+        return (
+            <TextInput style={styles.inputBox}
+              placeholder="Password" 
+              secureTextEntry={true}
+              ref={(input) => this.password = input}
+              onChangeText={(Password) => this.setState({Password})}/>
+        );  
+    }
 
-    componentWillMount() {
+    componentDidMount() {
         this.retrieveUser();
     }
 
@@ -52,7 +58,7 @@ class ProfileTab extends Component{
             <View style={styles.container}>
                 <ProfileHeader FirstName={ this.state.FirstName }/>
 
-             <TextInput style={styles.inputBox}
+            <TextInput style={styles.inputBox}
               placeholder="Username"
               selectionColor="#fff"
               value={this.state.UserName}
@@ -84,13 +90,9 @@ class ProfileTab extends Component{
               ref={(input) => this.email = input}
               onSubmitEditing={()=> this.password.focus()}
               onChangeText={(Email) => this.setState({Email})}/>
-            <TextInput style={styles.inputBox}
-              placeholder="Password" 
-              secureTextEntry={true}
-              ref={(input) => this.password = input}
-              onChangeText={(Password) => this.setState({Password})}/>
+            
             </View> 
-        )
+        );
     }
 }
 export default ProfileTab;

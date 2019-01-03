@@ -7,6 +7,10 @@ import { sha256 } from 'react-native-sha256';
 
 export default class Login extends Component {
 
+  static navigationOptions = {
+    header: null,
+  }
+
   Login(navigate) {
 
     let form = this.refs.LoginForm.getState();
@@ -17,6 +21,9 @@ export default class Login extends Component {
       if(user!= null){
         if(user.Password === form.Password ){
           this.storeUserName(form.UserName); // store user
+
+          this.hashPassword( form.Password );
+
           navigate("HomeTab");
         } else {
           alert('UserName/Pasword incorrect');
