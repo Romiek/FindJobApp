@@ -3,7 +3,7 @@ import { createStackNavigator, createAppContainer,
          createBottomTabNavigator, createSwitchNavigator } from 'react-navigation';
 import { StyleSheet, Platform  } from "react-native";
 import Login from './components/authentication/Login2';
-import Signup from './components/authentication/Signup';
+import Signup from './components/authentication/Signup2';
 import HomeTab from './components/tabNavigator/HomeTab';
 import JobsTab from './components/tabNavigator/JobsTab';
 import ProfileTab from './components/tabNavigator/ProfileTab2';

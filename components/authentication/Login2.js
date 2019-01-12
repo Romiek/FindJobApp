@@ -4,7 +4,40 @@ import { TextInput } from 'react-native-gesture-handler';
 import Logo from '../Logo';
 
 export default class Login extends Component {
+    constructor(props) {
+        super(props);
+    
+        this.state = { 
+          Email: '',
+          Password: ''
+        };
+      }
+
+      
+    static navigationOptions = {
+        header: null,
+    }
+
+    Login(navigate) {
+        if (this.state.Email !== '') {
+            this.storeUserName(this.state.Email); // store user
+
+            navigate("HomeTab");
+        } else {
+            alert('Email is Empty');
+        }
+    }
+
+    storeUserName = async (UserName) => {
+        try {
+          await AsyncStorage.setItem('UserName', UserName);
+        } catch (error) {
+          // Error saving data
+        }
+    }
+    
     render() {
+        const { navigate } = this.props.navigation;
         return (
             <View style={styles.container}>
                 <Logo/>
@@ -14,7 +47,7 @@ export default class Login extends Component {
                         selectionColor="#fff"
                         keyboardType="email-address" 
                         onSubmitEditing={()=> this.password.focus()}
-                        onChangeText={(UserName) => this.setState({UserName})}/>
+                        onChangeText={(Email) => this.setState({Email})}/>
                     <TextInput style={styles.inputBox}
                         placeholder="Password" 
                         secureTextEntry={true}
@@ -23,6 +56,18 @@ export default class Login extends Component {
                     <TouchableOpacity style={styles.button} onPress={() => this.Login(navigate) }>
                         <Text style={styles.buttonText}>Login</Text>
                     </TouchableOpacity>
+                    <View style={styles.forgotPassword}>
+                        <Text style={styles.signupText}>Trouble logging in?</Text>
+                        <TouchableOpacity>
+                            <Text style={styles.signupButton}> Click Here.</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.signupTextCont}>
+					    <Text style={styles.signupText}>Don't have an account yet?</Text>
+					    <TouchableOpacity onPress={() => navigate("Signup")}>
+                            <Text style={styles.signupButton}> Signup</Text>
+                        </TouchableOpacity>                    
+                    </View>
                 </View>
             </View>
         );
@@ -58,5 +103,24 @@ const styles = StyleSheet.create({
         fontWeight:'500',
         color:'#ffffff',
         textAlign:'center'
+    },
+    signupText: {
+        color:'rgba(255,255,255,0.6)',
+        fontSize:16,
+    },
+    signupButton: {
+        color:'#ffffff',
+        fontSize:16,
+        fontWeight:'500'
+    },
+    signupTextCont : {
+        flex:1,
+        alignItems:'flex-end',
+        justifyContent :'center',
+        flexDirection:'row'
+    },
+    forgotPassword : {
+        justifyContent :'center',
+        flexDirection:'row'
     },
 });
