@@ -1,8 +1,8 @@
 import React from "react";
 import { createStackNavigator, createAppContainer, 
          createBottomTabNavigator, createSwitchNavigator } from 'react-navigation';
-import { View, Text, StyleSheet, Platform  } from "react-native";
-import Login from './components/authentication/Login';
+import { StyleSheet, Platform  } from "react-native";
+import Login from './components/authentication/Login2';
 import Signup from './components/authentication/Signup';
 import HomeTab from './components/tabNavigator/HomeTab';
 import JobsTab from './components/tabNavigator/JobsTab';

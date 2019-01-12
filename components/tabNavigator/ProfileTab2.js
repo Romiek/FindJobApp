@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, AsyncStorage } from "react-native";
+import { Container, Header, Content, Form, Item, Input, Label, Button } from 'native-base';
 
 class ProfileTab2 extends Component{
     constructor(props) {
@@ -41,9 +42,23 @@ class ProfileTab2 extends Component{
 
     render(){
         return (
-            <View style={styles.container}>
-                 <Text>Profile</Text>
-            </View>
+            <Container style={styles.container} >
+            <Content>
+              <Form>
+                <Item floatingLabel>
+                  <Label>Username</Label>
+                  <Input />
+                </Item>
+                <Item floatingLabel last>
+                  <Label>Password</Label>
+                  <Input />
+                </Item>
+              </Form>
+              <Button rounded success>
+                <Text>Success</Text>
+                </Button>
+            </Content>
+          </Container>
             );
         }
 }
@@ -53,9 +68,6 @@ export default ProfileTab2;
 const styles = StyleSheet.create({
     container : {
         backgroundColor:'#455a64',
-        flex: 1,
-        alignItems:'center',
-        justifyContent :'center'
     },
     inputBox: {
         width:300,

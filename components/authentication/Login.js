@@ -84,8 +84,9 @@ export default class Login extends Component {
 
 const styles = StyleSheet.create({
   container:{
-    backgroundColor: '#455a64',
     flex:1,
+    flexDirection: 'column',
+    backgroundColor: '#455a64',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -104,7 +105,7 @@ const styles = StyleSheet.create({
   },
   signupText: {
   	color:'rgba(255,255,255,0.6)',
-  	fontSize:16
+  	fontSize:16,
   },
   signupButton: {
   	color:'#ffffff',
@@ -114,9 +115,9 @@ const styles = StyleSheet.create({
   button: {
     width:300,
     backgroundColor:'#1c313a',
-     borderRadius: 25,
-      marginVertical: 10,
-      paddingVertical: 13
+    borderRadius: 25,
+    marginVertical: 10,
+    paddingVertical: 13
   },
   buttonText: {
     fontSize:16,

@@ -69,7 +69,6 @@ export default class Signup extends Component {
 		return(
 			<View style={styles.container}>
 				<SignupForm ref='SignupForm'/>
-        <Text> {info} </Text>
         <TouchableOpacity style={styles.button} onPress={() => this.signUp(navigate) }>
           <Text style={styles.buttonText}>Signup</Text>
         </TouchableOpacity>
@@ -88,6 +87,7 @@ const styles = StyleSheet.create({
   container : {
     backgroundColor:'#455a64',
     flex: 1,
+    flexDirection: 'column',
     alignItems:'center',
     justifyContent :'center'
   },
